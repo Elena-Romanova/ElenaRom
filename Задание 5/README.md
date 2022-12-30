@@ -84,8 +84,54 @@ def main():
                         return False  
         return True
         
+    def check_false(s):
+        stack = []
+        is_current_correct = True
+
+        maxi = []
+        promeg = []
+
+        for bracket in s:
+            if bracket in brackets_open:
+                stack.append(bracket)
+                is_current_correct = True
+
+            if bracket in brackets_closed:
+                if len(stack) == 0:
+                    is_current_correct = False
+                    continue
+
+                previous_bracket = stack.pop()
+                if bracket == '}' and previous_bracket != '{':
+                    is_current_correct = False
+                if bracket == ']' and previous_bracket != '[':
+                    is_current_correct = False
+                if bracket == ')' and previous_bracket != '(':
+                    is_current_correct = False
+
+
+            if is_current_correct:
+                promeg.append(bracket)
+                if len(promeg) >= len(maxi):
+                    maxi = promeg
+            else:
+                if len(promeg) >= len(maxi):
+                    maxi = promeg
+                promeg = []
+        
+        return "".join(maxi[:-1])
+    
+    
+    
+    
+    brackets_open = '{[('
+    brackets_closed = ']})'
     s=input()
-    print (check(s))
+    if check(s) == False:
+        print (check(s))
+        print(check_false(s))
+    else:
+        print (check(s))
      
 
 if  __name__=="__main__":
@@ -97,5 +143,11 @@ Input: "()[]{}"
 Output: True
 Input: "(]"
 Output: False
+Input: ")()())"
+Output: "()()“
+Input: “{[()]{[()]}}”
+Output: True
+Input: “{[(]){[()]}}”
+Output: “ {[()]}”
 
 ```

@@ -24,25 +24,27 @@ p.s. Диапазон(-2^7, 2^7 - 1). В седьмой степени
 ``` Py
 def main():
   chislo =float(input())
-  if -2**7<=chislo<=+2**7:
-    i=chislo
-    rez=0
-    while i>0:
-      a = i % 10  # находим остаток - последнюю цифру  
-      i = i // 10   # делим нацело - удаляем последнюю цифру 
-      rez = rez * 10    # увеличиваем разрядность второго числа
-      rez = rez + a # добавляем очередную цифру
-  
-    print(rez)
+  i=abs(chislo)
+  rez=0
+  while i>0:
+    a = i % 10  # находим остаток - последнюю цифру  
+    i = i // 10   # делим нацело - удаляем последнюю цифру 
+    rez = rez * 10    # увеличиваем разрядность второго числа
+    rez = rez + a # добавляем очередную цифру
+  if chislo<0:
+    rez=rez*(-1)
+
+  if -2**7<=rez<=2**7:
+    print(int(rez))
   else:
-    print ("no solution")
-if __name__=="__main__":
-  main()
+    print("no solution")
+if __name__ == '__main__':
+    main()
 ```
 ### Мой результат выпонения программы
 ```
-Input: 12
-Output: 21
+Input: -37
+Output: -73
 Input: 123
 Output: "no solution"
 Input: -150
