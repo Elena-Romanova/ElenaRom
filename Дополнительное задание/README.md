@@ -27,10 +27,39 @@ def maximumSumD(nMaximum,maximumSum):
     rez = [kol_vo, bliz_sr_znach, suma]
     return rez
 
-nMaximum = int(input('Введите максимальное значение в диапозоне'))
-maximumSum = int(input ("Введите максимальную сумму цифр"))
 
-print (maximumSumD(nMaximum,maximumSum))
+def main():
+    t= open("dop_input.txt", "r")
+    f= open("dop_output.txt", "w+")
+    data = t.readlines()
+    print(data)
+
+    # убираю знаки табуляции, чтобы не мешали
+    for i in range (len(data)):
+        if data[i][-1] == '\n':  
+            data[i] = data[i][:-1]
+    print('полученные данные', data)
+
+    # превращаю строку значений, в список значений
+    for i in range (len(data)):
+        data[i] = data[i].split(', ')
+
+    #преобразую элементы из типа string в тип int
+    for i in data:
+        i[0]=int(i[0])
+        i[1]=int(i[1])
+
+    
+    for i in range (len(data)):
+        rez= maximumSumD(data[i][0],data[i][1])
+        f.write (f"{rez}\n")
+
+    f.close()
+        
+
+if __name__=="__main__":
+    main()         
+        
 ```
 # Мои результаты
 
